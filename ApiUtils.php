@@ -23,6 +23,25 @@ class ApiUtils{
 		return $resp;
 	}
 
+	public static function creatTaoWords($urlStr,$textStr,$logo){
+		$c = new TopClient;
+		$c->appkey = self::$my_app_key;
+		$c->secretKey = self::$my_app_secret_key;
+		$req = new TbkTpwdCreateRequest;
+		
+		$req->setText($textStr);
+		$req->setUrl($urlStr);
+		if (!empty($logo)) {
+			# code...
+			$req->setLogo($logo);
+		}
+		
+		
+		$resp = $c->execute($req);
+		var_dump('===淘口令===');
+		var_dump($resp);
+	}
+
 	public static function getHighCommission($itemId){
 		
 		$send_result = array();
@@ -53,7 +72,7 @@ class ApiUtils{
 			$send_result_data['couponmoney'] = $arr_msg_data['couponmoney'];
 			$send_result_data['coupon_click_url'] = $arr_msg_data['coupon_click_url'];
 			$send_result['data'] = $send_result_data;
-			//var_dump($send_result);
+			var_dump($send_result);
  		}else{
  			# 请求成功
 			$send_result['code'] = '0';
@@ -68,7 +87,7 @@ class ApiUtils{
 		$send_result = array('code'=>'0','msg'=>'error','data'=>'');
 
 		$taowords_result = self::analysisKeywords($taowords);
-		//var_dump($taowords_result);
+		var_dump($taowords_result);
 		if($taowords_result->suc == 'false'){
 			#淘口令请求失败
 
@@ -79,10 +98,14 @@ class ApiUtils{
 			# code...
 			return $send_result;
 		}else{
-			//是数字
+			//是数字，进行高佣金转链接
 			
 			$hightCommission = self::getHighCommission($item_id);
-			var_dump($hightCommission);
+			$title = $taowords_result->content;
+			$coupon_click_url = $hightCommission['data']['coupon_click_url'];
+			self::creatTaoWords($coupon_click_url,$title,'');
+			var_dump('============');
+			var_dump($coupon_click_url);
 		}
 		
 
