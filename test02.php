@@ -48,11 +48,12 @@ var_dump($res);
 **/
 
 
-//$result = ApiUtils::analysisKeywords("￥EAZobeqKyTS￥");
-//print_r($result);
+ //$result = ApiUtils::analysisKeywords("爱房间家用粉少女心可机洗定制】http://m.tb.cn/h.3gEHxPo?sm=b3cf83 点击链接，再选择浏览器咑閞；或復·制描述￥EWNtbVp0Gk7￥后");
+
+$result = ApiUtils::convertApi('描述￥EWNtbVp0Gk7￥后');
 
 
-//ApiUtils::getHighCommission("37407455923");
+//$result = ApiUtils::getHighCommission("553582995153");
 
 
 
@@ -71,7 +72,7 @@ $contentStr="999€EAZobeqKyTS€999";
 // 	$result = substr($contentStr, $a_index,$b_index);
 // }
 
-$result = RStringUtil::separateKouLing($contentStr);
+//$result = RStringUtil::separateKouLing($contentStr);
 // if($result==""){
 // 	echo "空";
 // }else{
@@ -85,13 +86,30 @@ if($result==""){
 
 
 
-//print_r($b===false);
+//print_r($b===false);000
+
+// if(RStringUtil::checkUrl('http://item.taobao.com/item.htm?id=553582995153我的是的')){
+// 	echo("是网址");
+// }else{
+// 	echo "不是网址";
+// }
+
+
+// if(RStringUtil::checkChinese('http://item.tahttp://m.tb.cn/h.3TaRJTQ')){
+// 	echo "有中文";
+// }else{
+// 	echo "没有中文";
+// }
 
 
 
+// $data = array('title' => '标题','money'=>'9.90' );
+// $result = array('code'=>'0','msg'=>'error','data'=>$data);
+// var_dump($result);
 
 
-
-
+// $test_arr = array();
+// $test_arr['000']='999';
+// echo ($test_arr['000']);
 
 ?>
