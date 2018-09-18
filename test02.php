@@ -57,6 +57,7 @@ var_dump($res);
 
 
 $contentStr="999EAZobeqKyTS￥999";
+$contentStr="999€EAZobeqKyTS€999";
 // $result = "999";
 // if(strstr($contentStr,"￥")){
 	
@@ -76,6 +77,11 @@ $result = RStringUtil::separateKouLing($contentStr);
 // }else{
 // 	echo $result;
 // }
+if($result==""){
+	echo "空";
+}else{
+	echo $result;
+}
 
 
 
