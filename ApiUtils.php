@@ -68,12 +68,24 @@ class ApiUtils{
 		$send_result = array('code'=>'0','msg'=>'error','data'=>'');
 
 		$taowords_result = self::analysisKeywords($taowords);
+		//var_dump($taowords_result);
 		if($taowords_result->suc == 'false'){
 			#淘口令请求失败
+
 			return $send_result;
 		}
 		$item_id = RStringUtil::separateItemId($taowords_result->url);
-		var_dump($item_id);
+		if (!is_numeric($item_id)) {
+			# code...
+			return $send_result;
+		}else{
+			//是数字
+			
+			$hightCommission = self::getHighCommission($item_id);
+			var_dump($hightCommission);
+		}
+		
+
 	}
 
 }

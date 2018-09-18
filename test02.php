@@ -12,19 +12,19 @@ date_default_timezone_set('Asia/Shanghai');
 
 
 
-function test($taowords){
-	$c = new TopClient;
-	//$c->appkey = '24333767';
-	//$c->secretKey = '8b5750f690730e4a2938b409329b0a3e';
-	$c->appkey = '12497914';
-	$c->secretKey = '4b0f28396e072d67fae169684613bcd1';
-	$req = new WirelessShareTpwdQueryRequest;
-	$req->setPasswordContent($taowords);
-	$resp = $c->execute($req);
-	print_r($resp);
-	$title = $resp->title;
-	return $title;
-}
+// function test($taowords){
+// 	$c = new TopClient;
+// 	//$c->appkey = '24333767';
+// 	//$c->secretKey = '8b5750f690730e4a2938b409329b0a3e';
+// 	$c->appkey = '12497914';
+// 	$c->secretKey = '4b0f28396e072d67fae169684613bcd1';
+// 	$req = new WirelessShareTpwdQueryRequest;
+// 	$req->setPasswordContent($taowords);
+// 	$resp = $c->execute($req);
+// 	print_r($resp);
+// 	$title = $resp->title;
+// 	return $title;
+// }
 //￥FrDKbeqHD9G￥
 //$a = test("￥EAZobeqKyTS￥");
 //print_r($a->title);
@@ -50,15 +50,15 @@ var_dump($res);
 
  //$result = ApiUtils::analysisKeywords("爱房间家用粉少女心可机洗定制】http://m.tb.cn/h.3gEHxPo?sm=b3cf83 点击链接，再选择浏览器咑閞；或復·制描述￥EWNtbVp0Gk7￥后");
 
-$result = ApiUtils::convertApi('描述￥EWNtbVp0Gk7￥后');
+$result = ApiUtils::convertApi('描述￥Z62TbVLKTnV￥后到');
 
 
 //$result = ApiUtils::getHighCommission("553582995153");
 
 
 
-$contentStr="999EAZobeqKyTS￥999";
-$contentStr="999€EAZobeqKyTS€999";
+// $contentStr="999EAZobeqKyTS￥999";
+// $contentStr="999€EAZobeqKyTS€999";
 // $result = "999";
 // if(strstr($contentStr,"￥")){
 	
@@ -78,11 +78,13 @@ $contentStr="999€EAZobeqKyTS€999";
 // }else{
 // 	echo $result;
 // }
-if($result==""){
-	echo "空";
-}else{
-	echo $result;
-}
+
+
+// if($result==""){
+// 	echo "空";
+// }else{
+// 	echo $result;
+// }
 
 
 

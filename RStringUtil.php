@@ -43,7 +43,7 @@ class RStringUtil{
 				$a_index = strpos($contentStr, 'com/i')+5;
 				$b_index = strpos($contentStr, '.htm');
 				$item_id = substr($contentStr, $a_index,$b_index-$a_index);
-				
+				return $item_id;
 			}
 		}
 	}
