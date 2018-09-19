@@ -59,6 +59,13 @@ class RStringUtil{
 		return (preg_match($regex, $contentStr));
 	}
 
+	public static function separateCouponexplain($contentStr){
+		$a_index = mb_strpos($contentStr, '满',0,"UTF8")+1;
+		$b_index = mb_strpos($contentStr, '元',0,"UTF8");
+		$result = mb_substr($contentStr, $a_index,$b_index-$a_index,"UTF8");
+		return $result;
+	}
+
 }
 
 ?>

@@ -48,14 +48,14 @@ var_dump($res);
 **/
 
 
- //$result = ApiUtils::analysisKeywords("爱房间家用粉少女心可机洗定制】http://m.tb.cn/h.3gEHxPo?sm=b3cf83 点击链接，再选择浏览器咑閞；或復·制描述￥EWNtbVp0Gk7￥后");
+// $result = ApiUtils::analysisKeywords("爱房间家用粉少女心可机洗定制】http://m.tb.cn/h.3gEHxPo?sm=b3cf83 点击链接，再选择浏览器咑閞；或復·制描述￥EWNtbVp0Gk7￥后");
 
 //$result = ApiUtils::convertApi('描述￥Z62TbVLKTnV￥后到');
 
 
-//$result = ApiUtils::getHighCommission("553582995153");
+//$result = ApiUtils::getHighCommission("575366389347");
 
-$result = ApiUtils::creatTaoWords('https://uland.taobao.com/coupon/edetail?e=UU%2BF5aYeAToGQASttHIRqW5la6%2Bg%2Bh3tTT3hgSW2HTvJrcyrdqNGeuhMTEh1L2f%2Fd7pzmbb5K16HLhyv9SDampQ5wfGz%2Fu%2BNKH0Sqb0wdcnMBAjZVSbr6yZ6Y%2FpkHtT5QS0Flu%2FfbSovkBQlP112cJ5ECHpSy25Ge6L%2Bf9DtnlV6dhEzHcMnnjcK2v3ZVS%2Fe&traceId=0b0b7a2815372821802538971e&union_lens=lensId:0bb698e5_08d3_165ed2884b6_62b7&thispid=mm_97861461_26020803_101016325&src=fklm_hltk&from=tool&sight=fklm','99900000000','');
+// $result = ApiUtils::creatTaoWords('https://uland.taobao.com/coupon/edetail?e=UU%2BF5aYeAToGQASttHIRqW5la6%2Bg%2Bh3tTT3hgSW2HTvJrcyrdqNGeuhMTEh1L2f%2Fd7pzmbb5K16HLhyv9SDampQ5wfGz%2Fu%2BNKH0Sqb0wdcnMBAjZVSbr6yZ6Y%2FpkHtT5QS0Flu%2FfbSovkBQlP112cJ5ECHpSy25Ge6L%2Bf9DtnlV6dhEzHcMnnjcK2v3ZVS%2Fe&traceId=0b0b7a2815372821802538971e&union_lens=lensId:0bb698e5_08d3_165ed2884b6_62b7&thispid=mm_97861461_26020803_101016325&src=fklm_hltk&from=tool&sight=fklm','99900000000','');
 
 // $result = ApiUtils::creatTaoWords('https://item.taobao.com/item.htm?spm=a310p.7395725.1998038907.1.248f5564mjz39S&id=545701722345','999','');
 
@@ -116,4 +116,11 @@ $result = ApiUtils::creatTaoWords('https://uland.taobao.com/coupon/edetail?e=UU%
 // $test_arr['000']='999';
 // echo ($test_arr['000']);
 
+
+RStringUtil::separateCouponexplain('满16元可用');
+
+// var_dump(mb_strpos('开始23测试ceshi', '测试',0,"UTF8"));
+// var_dump(strpos('开始23测试ceshi', '测试'));
+// var_dump(mb_strlen('我是111',"UTF8"));
+// var_dump(strlen('我是111'));
 ?>
