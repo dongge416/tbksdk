@@ -50,7 +50,7 @@ var_dump($res);
 
 // $result = ApiUtils::analysisKeywords("爱房间家用粉少女心可机洗定制】http://m.tb.cn/h.3gEHxPo?sm=b3cf83 点击链接，再选择浏览器咑閞；或復·制描述￥EWNtbVp0Gk7￥后");
 
-//$result = ApiUtils::convertApi('描述￥Z62TbVLKTnV￥后到');
+$result = ApiUtils::convertApi('描述￥EWNtbVp0Gk7￥后');
 
 
 //$result = ApiUtils::getHighCommission("575366389347");
@@ -117,7 +117,7 @@ var_dump($res);
 // echo ($test_arr['000']);
 
 
-RStringUtil::separateCouponexplain('满16元可用');
+//RStringUtil::separateCouponexplain('满16元可用');
 
 // var_dump(mb_strpos('开始23测试ceshi', '测试',0,"UTF8"));
 // var_dump(strpos('开始23测试ceshi', '测试'));

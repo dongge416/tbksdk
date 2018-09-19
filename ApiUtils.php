@@ -106,6 +106,8 @@ class ApiUtils{
 			//是数字，进行高佣金转链接
 			
 			$hightCommission = self::getHighCommission($item_id);
+			var_dump('==========');
+			var_dump($hightCommission);
 			//标题
 			$title = $taowords_result->content;
 			//二合一连接
@@ -115,9 +117,9 @@ class ApiUtils{
 			//原价
 			$original_price = $taowords_result->price;
 			//优惠劵金额
-			$couponmoney = $hightCommission['couponmoney'];
+			$couponmoney = $hightCommission['data']['couponmoney'];
 			//优惠劵使用条件
-			$couponexplain = $hightCommission['couponexplain'];
+			$couponexplain = $hightCommission['data']['couponexplain'];
 			//券后价
 			$discount_price;
 			//优惠劵使用条件金额
@@ -129,12 +131,22 @@ class ApiUtils{
 				$discount_price = $original_price;
 			}
 			
+			//计算佣金
+			//佣金比率
+			$max_commission_rate = $hightCommission['data']['max_commission_rate'];
+			//佣金
+			$commission = $discount_price * $max_commission_rate / 100;
+			var_dump('---discount_price---');
+			var_dump($discount_price);
+			var_dump('---max_commission_rate---');
+			var_dump($max_commission_rate);
+			var_dump('---original_price--');
+			var_dump($original_price);
+			var_dump('--佣金--');
+			var_dump($commission);
+
 
 			
-			
-			//券后价
-			
-			// $discount_price = 
 			if (!empty($send_taoword)) {
 				# code...
 			}
