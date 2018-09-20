@@ -19,7 +19,7 @@ class ApiUtils{
 		$req = new WirelessShareTpwdQueryRequest;
 		$req->setPasswordContent($taowords);
 		$resp = $c->execute($req);
-		print_r($resp);
+		//print_r($resp);
 		return $resp;
 	}
 
@@ -54,8 +54,11 @@ class ApiUtils{
 		$req->setNumIids($itemId);
 		
 		$resp = $c->execute($req);
-		var_dump($resp);
-		return $resp;
+		$arr_results = $resp->results;
+		$n_tbk_item = $arr_results->n_tbk_item;
+
+		
+		return $n_tbk_item;
 	}
 
 	public static function getHighCommission($itemId){
@@ -77,7 +80,7 @@ class ApiUtils{
 		$arr_msg_result = json_decode($res,true);
 		$arr_msg_code = $arr_msg_result['code'];
 		$arr_msg_data = $arr_msg_result['data'];
-		var_dump($res);
+		//var_dump($res);
 
 		if ($arr_msg_code==1) {
 			# 请求成功
@@ -104,26 +107,28 @@ class ApiUtils{
 		$send_result = array('code'=>'0','msg'=>'error','data'=>'');
 
 		$taowords_result = self::analysisKeywords($taowords);
-		var_dump($taowords_result);
+		//var_dump($taowords_result);
 		if($taowords_result->suc == 'false'){
 			#淘口令请求失败
 
 			return $send_result;
 		}
 		$item_id = RStringUtil::separateItemId($taowords_result->url);
-		echo "item_id:".$item_id;
+		//echo "item_id:".$item_id;
 		if (!is_numeric($item_id)) {
 			# code...
-			echo '解析ID失败:'.$item_id;
+			//echo '解析ID失败:'.$item_id;
 			return $send_result;
 		}else{
 			//是数字，进行高佣金转链接
 			
 			$hightCommission = self::getHighCommission($item_id);
-			var_dump('==========');
-			var_dump($hightCommission);
+			//var_dump('==========');
+			//var_dump($hightCommission);
 			//标题
 			$title = $taowords_result->content;
+			//var_dump('-----title------');
+			//echo ($title);
 			//二合一连接
 			$coupon_click_url = $hightCommission['data']['coupon_click_url'];
 			//返回的淘口令
@@ -133,9 +138,10 @@ class ApiUtils{
 			if (empty($original_price)) {
 				#原价为空
 				$item_info = self::getItemInfo($item_id);
+				$original_price = $item_info->zk_final_price;
 
 			}
-			$original_price = floatval($taowords_result->price);
+			$original_price = floatval($original_price);
 			//优惠劵金额
 			$couponmoney = $hightCommission['data']['couponmoney'];
 			//优惠劵使用条件
@@ -147,12 +153,11 @@ class ApiUtils{
 			if ($original_price >= $couponexplain_money) {
 				# 可以使用优惠劵
 				$discount_price = $original_price - $couponmoney;
-				var_dump('------8888888888-------');
-				var_dump($original_price);
-				var_dump($couponmoney);
-				var_dump($discount_price);
-
-				var_dump('------8888888888-------');
+				// var_dump('------8888888888-------');
+				// var_dump($original_price);
+				// var_dump($couponmoney);
+				// var_dump($discount_price);
+				// var_dump('------8888888888-------');
 			}else{
 				
 				$discount_price = $original_price;
@@ -163,28 +168,41 @@ class ApiUtils{
 			$max_commission_rate = $hightCommission['data']['max_commission_rate'];
 			//佣金
 			$commission = $discount_price * ($max_commission_rate / 100);
-			var_dump('--佣金--');
-			var_dump($commission);
+			// var_dump('--佣金--');
+			// var_dump($commission);
 			$commission = round($commission,2);
-			var_dump($commission);
+			// var_dump($commission);
 			
-			var_dump('---discount_price---');
-			var_dump($discount_price);
-			var_dump('---max_commission_rate---');
-			var_dump($max_commission_rate);
-			var_dump('---original_price--');
-			var_dump($original_price);
+			// var_dump('---discount_price---');
+			// var_dump($discount_price);
+			// var_dump('---max_commission_rate---');
+			// var_dump($max_commission_rate);
+			// var_dump('---original_price--');
+			// var_dump($original_price);
 			
+			
+
 
 			//返利
 			$rebate_money = RStringUtil::countRebateMoney($commission);
 			$rebate_money = round($rebate_money,2);
-			var_dump('-----返利----');
-			var_dump($rebate_money);
+			// var_dump('-----返利----');
+			// var_dump($rebate_money);
 			
 			if (!empty($send_taoword)) {
 				# code...
 			}
+
+
+			$send_result_data['code'] = '1';
+			$send_result_data['msg'] = 'SUCCESS';
+			$send_result_data['data']['title']=$title;
+			$send_result_data['data']['discount_price'] = $discount_price;
+			$send_result_data['data']['commission'] = $commission;
+			$send_result_data['data']['couponmoney'] = $couponmoney;
+			$send_result_data['data']['rebate_money'] = $rebate_money;
+			$send_result_json = json_encode($send_result_data,JSON_UNESCAPED_UNICODE);
+			return $send_result_json;
 		}
 		
 

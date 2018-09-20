@@ -50,10 +50,11 @@ var_dump($res);
 
 // $result = ApiUtils::analysisKeywords("爱房间家用粉少女心可机洗定制】http://m.tb.cn/h.3gEHxPo?sm=b3cf83 点击链接，再选择浏览器咑閞；或復·制描述￥EWNtbVp0Gk7￥后");
 
-//$result = ApiUtils::convertApi('描述￥fjXIb4aQhMU￥');
+$result = ApiUtils::convertApi('描述￥QNTfb41jVuE￥后');
+echo($result);
 
 
-ApiUtils::getItemInfo('56366021766359');
+//ApiUtils::getItemInfo('56366021766359');
 
 // $a = 2.3;
 // var_dump($a/100)*10;
