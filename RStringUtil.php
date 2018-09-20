@@ -35,8 +35,16 @@ class RStringUtil{
 
 	public static function separateItemId($contentStr){
 		$item_id;
-		if (strstr($contentStr, 'taobao.com/i')) {
+		if (strstr($contentStr, 'https://item.taobao.com/item.htm?')) {
 			# code...
+			$a_index = strpos($contentStr, '&id=')+4;
+			$b_index = strpos($contentStr, '&sourceType');
+			echo 'a_index:'.$a_index;
+			echo 'b_index:'.$b_index;
+			$item_id = substr($contentStr, $a_index,$b_index-$a_index);
+			return $item_id;
+		}else if (strstr($contentStr, 'taobao.com/i')) {
+			
 			
 			if (strstr($contentStr, '.htm')&&strstr($contentStr, 'sourceType=item')) {
 				# code...
@@ -64,6 +72,32 @@ class RStringUtil{
 		$b_index = mb_strpos($contentStr, '元',0,"UTF8");
 		$result = mb_substr($contentStr, $a_index,$b_index-$a_index,"UTF8");
 		return $result;
+	}
+
+	public static function countRebateMoney($money){
+		$rebate_rate ;
+		$rebate_money;
+		if ($money<=0.3) {
+			# code...
+			$rebate_rate = 0.7;
+		}else if ($money <= 1) {
+			# code...
+			$rebate_rate = 0.65;
+		}else if ($money <= 3) {
+			$rebate_rate = 0.5;
+		}else if ($money <= 5) {
+			$rebate_rate = 0.48;
+		}else if ($money <= 15) {
+			$rebate_rate = 0.45;
+		}else if ($money <= 80) {
+			$rebate_rate = 0.4;
+		}else if ($money <= 200) {
+			$rebate_rate = 0.35;
+		}elseif ($money <= 500) {
+			$rebate_rate = 0.3;
+		}
+		$rebate_money = $money * $rebate_rate;
+		return $rebate_money; 
 	}
 
 }
