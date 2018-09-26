@@ -31,7 +31,7 @@ class ApiUtils{
 		$req = new TbkTpwdCreateRequest;
 		
 		$req->setText($textStr);
-		$req->setUrl('$urlStr');
+		$req->setUrl($urlStr);
 		if (!empty($logo)) {
 			# code...
 			$req->setLogo($logo);
@@ -133,6 +133,7 @@ class ApiUtils{
 			$coupon_click_url = $hightCommission['data']['coupon_click_url'];
 			//返回的淘口令
 			$send_taoword = self::creatTaoWords($coupon_click_url,$title,'');
+			
 			//原价
 			$original_price = $taowords_result->price;
 			if (empty($original_price)) {
@@ -201,6 +202,7 @@ class ApiUtils{
 			$send_result_data['data']['commission'] = $commission;
 			$send_result_data['data']['couponmoney'] = $couponmoney;
 			$send_result_data['data']['rebate_money'] = $rebate_money;
+			$send_result_data['data']['send_taoword'] = $send_taoword;
 			$send_result_json = json_encode($send_result_data,JSON_UNESCAPED_UNICODE);
 			return $send_result_json;
 		}
