@@ -92,7 +92,7 @@ class ApiUtils{
 			$send_result_data['coupon_click_url'] = $arr_msg_data['coupon_click_url'];
 			$send_result_data['couponexplain'] = $arr_msg_data['couponexplain'];
 			$send_result['data'] = $send_result_data;
-			//var_dump($send_result);
+			var_dump($send_result);
  		}else{
  			# 请求成功
 			$send_result['code'] = '0';

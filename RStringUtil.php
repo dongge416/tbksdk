@@ -9,8 +9,8 @@ class RStringUtil{
 			
 			$a_index = strpos($contentStr,"￥");
 			$b_index = strrpos($contentStr,"￥");
-			echo "a_index:".$a_index;
-			echo "b_index:".$b_index;
+			// echo "a_index:".$a_index;
+			// echo "b_index:".$b_index;
 			$result = substr($contentStr, $a_index,$b_index);
 			
 		}else if(strstr($contentStr,"*")){
@@ -39,8 +39,8 @@ class RStringUtil{
 			# code...
 			$a_index = strpos($contentStr, '&id=')+4;
 			$b_index = strpos($contentStr, '&sourceType');
-			echo 'a_index:'.$a_index;
-			echo 'b_index:'.$b_index;
+			// echo 'a_index:'.$a_index;
+			// echo 'b_index:'.$b_index;
 			$item_id = substr($contentStr, $a_index,$b_index-$a_index);
 			return $item_id;
 		}else if (strstr($contentStr, 'taobao.com/i')) {
