@@ -8,6 +8,12 @@ include "ApiUtils.php";
 include "RStringUtil.php";
 
 $content_str = $_GET['content'];
+
+if (RStringUtil::checkUrl($content_str)) {
+	# code...
+}
+
+
 $result_data = ApiUtils::convertApi($content_str);
 echo $result_data;
 

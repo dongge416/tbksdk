@@ -92,7 +92,7 @@ class ApiUtils{
 			$send_result_data['coupon_click_url'] = $arr_msg_data['coupon_click_url'];
 			$send_result_data['couponexplain'] = $arr_msg_data['couponexplain'];
 			$send_result['data'] = $send_result_data;
-			var_dump($send_result);
+			//var_dump($send_result);
  		}else{
  			# 请求成功
 			$send_result['code'] = '0';
@@ -106,23 +106,52 @@ class ApiUtils{
 	public static function convertApi($taowords){
 		$send_result = array('code'=>'0','msg'=>'error','data'=>'');
 
-		$taowords_result = self::analysisKeywords($taowords);
-		//var_dump($taowords_result);
-		if($taowords_result->suc == 'false'){
-			#淘口令请求失败
-
-			return $send_result;
+		$item_id ;
+		if (RStringUtil::checkUrl($taowords)) {
+			# 是链接，分离itmeid
+			//$send_result['data'] = '系统无法识别这个口令，请在淘宝把链接复制给我查询';
+			
+			//return $send_result;
 		}
+
+		if(RStringUtil::isTamllKouLing($taowords)){
+			$send_result['data'] = '系统无法识别这个口令，请在淘宝把链接复制给我查询';
+			var_dump('isTamllKouLing');
+
+			return json_encode($send_result,JSON_UNESCAPED_UNICODE);
+		}
+
+		if(RStringUtil::isKouLing($taowords)){
+			$taowords_result = self::analysisKeywords($taowords);
+			//var_dump($taowords_result);
+			if($taowords_result->suc == 'false'){
+				#淘口令请求失败
+				$send_result['data'] = '抱歉！这个链接没有任何优惠和反利,请换一个宝贝再试';
+				return json_encode($send_result,JSON_UNESCAPED_UNICODE);
+			}
+		}
+
+		
 		$item_id = RStringUtil::separateItemId($taowords_result->url);
 		//echo "item_id:".$item_id;
 		if (!is_numeric($item_id)) {
 			# code...
 			//echo '解析ID失败:'.$item_id;
-			return $send_result;
+			$send_result['data'] = '系统无法识别这个口令，请在淘宝把链接复制给我查询';
+			return json_encode($send_result,JSON_UNESCAPED_UNICODE);
 		}else{
 			//是数字，进行高佣金转链接
 			
 			$hightCommission = self::getHighCommission($item_id);
+			//var_dump($hightCommission);
+			$code = $hightCommission['code'];
+			if ($code == 0) {
+				# code...
+				$send_result['data'] = '抱歉！这个链接没有任何优惠和反利,请换一个宝贝再试';
+				//var_dump('-----');
+				return json_encode($send_result,JSON_UNESCAPED_UNICODE);
+			}
+
 			//var_dump('==========');
 			//var_dump($hightCommission);
 			//标题
@@ -195,15 +224,15 @@ class ApiUtils{
 			}
 
 
-			$send_result_data['code'] = '1';
-			$send_result_data['msg'] = 'SUCCESS';
-			$send_result_data['data']['title']=$title;
-			$send_result_data['data']['discount_price'] = $discount_price;
-			$send_result_data['data']['commission'] = $commission;
-			$send_result_data['data']['couponmoney'] = $couponmoney;
-			$send_result_data['data']['rebate_money'] = $rebate_money;
-			$send_result_data['data']['send_taoword'] = $send_taoword;
-			$send_result_json = json_encode($send_result_data,JSON_UNESCAPED_UNICODE);
+			$send_result['code'] = '1';
+			$send_result['msg'] = 'SUCCESS';
+			$send_result['data']['title']=$title;
+			$send_result['data']['discount_price'] = $discount_price;
+			$send_result['data']['commission'] = $commission;
+			$send_result['data']['couponmoney'] = $couponmoney;
+			$send_result['data']['rebate_money'] = $rebate_money;
+			$send_result['data']['send_taoword'] = $send_taoword;
+			$send_result_json = json_encode($send_result,JSON_UNESCAPED_UNICODE);
 			return $send_result_json;
 		}
 		

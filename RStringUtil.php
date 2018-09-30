@@ -3,6 +3,25 @@
 class RStringUtil{
 
 
+	public static function isKouLing($contentStr){
+		if (strstr($contentStr, "￥")||strstr($contentStr, "€")) {
+			
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	public static function sisTamllKouLing(){
+
+		if (strstr($contentStr, "喵口令")) {
+			
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	public static function separateKouLing($contentStr){
 		$result = "";
 		if(strstr($contentStr,"￥")){
