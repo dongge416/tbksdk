@@ -12,7 +12,7 @@ class RStringUtil{
 		}
 	}
 
-	public static function sisTamllKouLing(){
+	public static function isTamllKouLing(){
 
 		if (strstr($contentStr, "喵口令")) {
 			
